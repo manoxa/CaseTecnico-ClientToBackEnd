@@ -12,7 +12,7 @@ import br.com.development.client.domain.Autor;
 import br.com.development.client.domain.Comentario;
 import br.com.development.client.domain.Livro;
 
-public class EndToEndBooksAPI {
+public class EndToEndCaseBackEndSpring {
 	
 
 	LivrosClient livrosClient = new LivrosClient("http://localhost:8080");
