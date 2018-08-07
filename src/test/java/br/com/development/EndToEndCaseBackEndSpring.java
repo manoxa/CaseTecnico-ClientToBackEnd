@@ -12,9 +12,9 @@ import br.com.development.client.domain.Autor;
 import br.com.development.client.domain.Comentario;
 import br.com.development.client.domain.Livro;
 
+
 public class EndToEndCaseBackEndSpring {
 	
-
 	LivrosClient livrosClient = new LivrosClient("http://localhost:8080");
 	AutoresClient autoresClient = new AutoresClient("http://localhost:8080");
 	
@@ -23,8 +23,8 @@ public class EndToEndCaseBackEndSpring {
 		List<Livro> livros = livrosClient.listar();
 		
 		Autor autor = new Autor();
-		autor.setNome("Robert Rodriguez");
-		autor.setNacionalidade("Espano");
+		autor.setNome("Solange Borges de Almeida");
+		autor.setNacionalidade("Brasileira");
 		autor.setNascimento(new Date());
 		autor.setLivros(livros);
 		
@@ -45,10 +45,10 @@ public class EndToEndCaseBackEndSpring {
 		List<Comentario> comentarios = new ArrayList<Comentario>();
 		Livro livro = new Livro();
 		
-		livro.setNome("Gerenciando containers com Kubernetes");
+		livro.setNome("Angular Cli");
 		livro.setEditora("Marques Books");
 		livro.setPublicacao(new Date());
-		livro.setResumo("Livro voltado para profissionais de TI mais especificamente DevOps");
+		livro.setResumo("Modernizando o frontend.");
 		livro.setComentarios(comentarios);
 		livro.setAutor(autor);
 		
