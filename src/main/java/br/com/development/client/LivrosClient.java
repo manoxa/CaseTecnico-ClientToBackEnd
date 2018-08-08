@@ -8,6 +8,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.development.client.domain.Comentario;
 import br.com.development.client.domain.Livro;
 
 public class LivrosClient {
@@ -16,8 +17,10 @@ public class LivrosClient {
 	
 	private String URI_BASE;
 	
-	private String URN_BASE = "/livros";
+	private String URN_BASE = "/livros/";
 	
+	private String BASE_COMENTARIO = "/comentarios";
+		
 	
 	public LivrosClient(String url) {
 		restTemplate = new RestTemplate();
@@ -51,4 +54,29 @@ public class LivrosClient {
 		
 		return response.getBody();
 	}
+
+	public String salvarComentario(Long id, Comentario comentario) {
+	
+		List<Livro> livros = listar();
+		Livro livro = null;
+		
+		if(livros.size()>0) {
+			livro = livros.get(0);			
+		}else {
+			livro = livros.get(id.intValue());	
+		}
+		
+		String codigoLivro = livro.getId().toString();
+		
+		comentario.setLivro(livro);
+		RequestEntity<Comentario> request = RequestEntity
+				.post(URI.create(URI_BASE + codigoLivro + BASE_COMENTARIO)).body(comentario);
+	
+		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
+		
+		return response.getHeaders().getLocation().toString();
+		
+	}
+	
+
  }

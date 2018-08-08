@@ -19,21 +19,17 @@ public class EndToEndCaseBackEndSpring {
 	AutoresClient autoresClient = new AutoresClient("http://localhost:8080");
 	
 	@Test
-	public void deveSalvarUmAutor() {
+	public void deveSalvarUmAutorUmLivroEumComentario() {
+		
 		List<Livro> livros = livrosClient.listar();
 		
-		Autor autor = new Autor();
-		autor.setNome("Solange Borges de Almeida");
-		autor.setNacionalidade("Brasileira");
-		autor.setNascimento(new Date());
-		autor.setLivros(livros);
+		Autor autor1 = new Autor();
+		autor1.setNome("Robert Rodriguez");
+		autor1.setNacionalidade("Espanol");
+		autor1.setNascimento(new Date());
+		autor1.setLivros(livros);
 		
-		autoresClient.salvar(autor);
-		
-	}
-	
-	@Test
-	public void deveSalvarUmLivro() {
+		autoresClient.salvar(autor1);
 		
 		List<Autor> autores = autoresClient.listar();
 		Autor autor = null;
@@ -45,14 +41,28 @@ public class EndToEndCaseBackEndSpring {
 		List<Comentario> comentarios = new ArrayList<Comentario>();
 		Livro livro = new Livro();
 		
-		livro.setNome("Angular Cli");
+		livro.setNome("Microservices com SpringBoot");
 		livro.setEditora("Marques Books");
 		livro.setPublicacao(new Date());
-		livro.setResumo("Modernizando o frontend.");
+		livro.setResumo("Livro voltado para Desenvolvedores de Software");
 		livro.setComentarios(comentarios);
 		livro.setAutor(autor);
 		
 		livrosClient.salvar(livro);
+				
+		List<Livro> todosLivros = livrosClient.listar();
+		Livro queroUmLivro = null;
+		
+		for(Livro livroSelecionado: todosLivros) {
+			queroUmLivro = livroSelecionado;
+		}
+		
+		Comentario comentario = new Comentario();
+		comentario.setUsuario("amrodrigues");
+		comentario.setData(new Date());
+		comentario.setTexto("Particularmente esse livro é o melhor referênte ao assunto.");
+		
+		livrosClient.salvarComentario(queroUmLivro.getId(), comentario);
 	}
-
+	
 }

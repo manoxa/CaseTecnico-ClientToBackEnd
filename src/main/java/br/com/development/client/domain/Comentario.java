@@ -9,7 +9,6 @@ public class Comentario {
 
 	private Long id;
 	
-	@JsonProperty("comentario")
 	private String texto;
 	
 	private String usuario;
